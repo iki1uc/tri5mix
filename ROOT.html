@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>tri5mix / ROOT</title>
+
+<style>
+body { background:#000; color:#0f0; font-family:monospace; }
+h1, h2 { color:#6cf; }
+button { padding:8px 14px; background:#111; color:#0f0; border:1px solid #333; cursor:pointer; }
+button:hover { background:#222; }
+pre { background:#000; border:1px solid #333; padding:10px; }
+a { color:#6cf; }
+</style>
+</head>
+
+<body>
+
+<h1>tri5mix / ROOT</h1>
+
+<h2>ID</h2>
+<pre id="triID">Noch keine ID.</pre>
+
+<script>
+function setID(axis){
+    const map = {
+        A1: { core:"IKI", pos:"(1, Φ)", code:"Φ" },
+        A2: { core:"BIR", pos:"(2, φ)", code:"φ" },
+        A3: { core:"UC",  pos:"(3, φ²)", code:"φ²" },
+        A4: { core:"MA³", pos:"(4, φ∞)", code:"φ∞" },
+        A5: { core:"RAW", pos:"(5, RAW)", code:"RAW" }
+    };
+
+    const id = map[axis];
+
+    document.getElementById("triID").innerText =
+        "CORE = " + id.core + "\n" +
+        "pos(CORE) = " + id.pos + "\n" +
+        "code = " + id.code + "\n" +
+        "axis = " + axis + "\n";
+}
+</script>
+
+<form method="get">
+
+<button onclick="setID('A1')"
+  formaction="error.html?from=ROOT&axis=A1&core=IKI&pos=(1,Φ)&code=Φ&id=A1-001&mode=NC&hint=A1+Fehler">
+A1
+</button>
+
+<button onclick="setID('A2')"
+  formaction="error.html?from=ROOT&axis=A2&core=BIR&pos=(2,φ)&code=φ&id=A2-001&mode=NC&hint=A2+Fehler">
+A2
+</button>
+
+<button onclick="setID('A3')"
+  formaction="error.html?from=ROOT&axis=A3&core=UC&pos=(3,φ²)&code=φ²&id=A3-001&mode=NC&hint=A3+Fehler">
+A3
+</button>
+
+<button onclick="setID('A4')"
+  formaction="error.html?from=ROOT&axis=A4&core=MA³&pos=(4,φ∞)&code=φ∞&id=A4-001&mode=NC&hint=A4+Fehler">
+A4
+</button>
+
+<button onclick="setID('A5')"
+  formaction="error.html?from=ROOT&axis=A5&core=RAW&pos=(5,RAW)&code=RAW&id=A5-001&mode=NC&hint=A5+Fehler">
+A5
+</button>
+
+</form>
+
+<a href="error.html?from=ROOT&axis=NC&core=RAW&pos=(0,RAW)&code=RAW&id=ROOT-ERR&mode=PRO&hint=ROOT+Fehler">
+ROOT → ERROR
+</a>
+
+</body>
+</html>
