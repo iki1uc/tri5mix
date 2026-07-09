@@ -1,0 +1,54 @@
+<script>
+// tri5mix DISPATCHER – verbindet ENGINE + ROOT + ID + Geometrie
+
+function tri5mix(f){
+
+    // ENGINE
+    const axis = orbit(f);
+    const op   = operator(f);
+    const rn   = run(f);
+
+    // SCAN
+    const scan = f.length;
+
+    // POS (4D)
+    const pos = scan % 16;
+
+    // MASS (5D)
+    const mass = scan * 5;
+
+    // ORBIT‑Norm (6D)
+    const orbitNorm = {
+        "IKI":"Φ",
+        "BIR":"φ",
+        "UC":"φ²",
+        "MA³":"φ∞",
+        "RAW":"RAW"
+    }[axis];
+
+    // ROOT‑ID
+    const idMap = {
+        "IKI": { axis:"A1", pos:"(1, Φ)", code:"Φ" },
+        "BIR": { axis:"A2", pos:"(2, φ)", code:"φ" },
+        "UC":  { axis:"A3", pos:"(3, φ²)", code:"φ²" },
+        "MA³": { axis:"A4", pos:"(4, φ∞)", code:"φ∞" },
+        "RAW": { axis:"A5", pos:"(5, RAW)", code:"RAW" }
+    };
+
+    const id = idMap[axis];
+
+    // 6D‑Körper
+    return {
+        CORE: axis,
+        AXIS: id.axis,
+        CODE: id.code,
+        POS: pos,
+        MASS: mass,
+        RUN: rn,
+        OPERATOR: op,
+        ORBIT: orbitNorm,
+        SCAN: scan,
+        GEOMETRY: "6D"
+    };
+}
+</script>
