@@ -2,15 +2,27 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>tri5mix / ROOT</title>
+<title>tri5mix / ROOT – FINAL</title>
 
 <style>
 body { background:#000; color:#0f0; font-family:monospace; }
 h1, h2 { color:#6cf; }
-button { padding:8px 14px; background:#111; color:#0f0; border:1px solid #333; cursor:pointer; }
+button {
+    padding:8px 14px;
+    background:#111;
+    color:#0f0;
+    border:1px solid #333;
+    cursor:pointer;
+    width:120px;
+    margin:4px;
+}
 button:hover { background:#222; }
-pre { background:#000; border:1px solid #333; padding:10px; }
-a { color:#6cf; }
+pre {
+    background:#000;
+    border:1px solid #333;
+    padding:10px;
+    width:260px;
+}
 </style>
 </head>
 
@@ -22,6 +34,9 @@ a { color:#6cf; }
 <pre id="triID">Noch keine ID.</pre>
 
 <script>
+// ------------------------------
+// ID‑System
+// ------------------------------
 function setID(axis){
     const map = {
         A1: { core:"IKI", pos:"(1, Φ)", code:"Φ" },
@@ -39,40 +54,50 @@ function setID(axis){
         "code = " + id.code + "\n" +
         "axis = " + axis + "\n";
 }
+
+// ------------------------------
+// FINAL: Fehler‑System
+// Kein GitHub‑Error, kein Browser‑Error
+// ------------------------------
+function tri5mixAxis(axis){
+
+    // Erfolg: ID setzen
+    setID(axis);
+
+    // Fehler‑Schalter (du entscheidest)
+    // false = KEIN Fehler
+    // true  = Fehler → ERRORMETER
+    const error = false;
+
+    if(error){
+        const idText = document.getElementById("triID").innerText.split("\n");
+
+        const core = idText[0].replace("CORE = ","");
+        const pos  = idText[1].replace("pos(CORE) = ","");
+        const code = idText[2].replace("code = ","");
+
+        window.location.href =
+            "error.html"
+            + "?from=ROOT"
+            + "&axis=" + axis
+            + "&core=" + core
+            + "&pos="  + pos
+            + "&code=" + code
+            + "&id="   + axis + "-ERR"
+            + "&mode=NC"
+            + "&hint=ROOT+Fehler";
+    }
+}
 </script>
 
-<form method="get">
-
-<button onclick="setID('A1')"
-  formaction="error.html?from=ROOT&axis=A1&core=IKI&pos=(1,Φ)&code=Φ&id=A1-001&mode=NC&hint=A1+Fehler">
-A1
-</button>
-
-<button onclick="setID('A2')"
-  formaction="error.html?from=ROOT&axis=A2&core=BIR&pos=(2,φ)&code=φ&id=A2-001&mode=NC&hint=A2+Fehler">
-A2
-</button>
-
-<button onclick="setID('A3')"
-  formaction="error.html?from=ROOT&axis=A3&core=UC&pos=(3,φ²)&code=φ²&id=A3-001&mode=NC&hint=A3+Fehler">
-A3
-</button>
-
-<button onclick="setID('A4')"
-  formaction="error.html?from=ROOT&axis=A4&core=MA³&pos=(4,φ∞)&code=φ∞&id=A4-001&mode=NC&hint=A4+Fehler">
-A4
-</button>
-
-<button onclick="setID('A5')"
-  formaction="error.html?from=ROOT&axis=A5&core=RAW&pos=(5,RAW)&code=RAW&id=A5-001&mode=NC&hint=A5+Fehler">
-A5
-</button>
-
-</form>
-
-<a href="error.html?from=ROOT&axis=NC&core=RAW&pos=(0,RAW)&code=RAW&id=ROOT-ERR&mode=PRO&hint=ROOT+Fehler">
-ROOT → ERROR
-</a>
+<!-- ------------------------------ -->
+<!-- FINAL: Buttons (keine Form!)   -->
+<!-- ------------------------------ -->
+<button onclick="tri5mixAxis('A1')">A1</button>
+<button onclick="tri5mixAxis('A2')">A2</button>
+<button onclick="tri5mixAxis('A3')">A3</button>
+<button onclick="tri5mixAxis('A4')">A4</button>
+<button onclick="tri5mixAxis('A5')">A5</button>
 
 </body>
 </html>
