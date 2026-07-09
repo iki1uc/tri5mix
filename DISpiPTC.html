@@ -1,23 +1,65 @@
-<script>
-// tri5mix DISPATCHER – verbindet ENGINE + ROOT + ID + Geometrie
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>tri5mix DISPATCHER</title>
 
+<style>
+body { background:#000; color:#0f0; font-family:monospace; padding:20px; }
+h1 { color:#6cf; }
+pre { background:#000; border:1px solid #333; padding:10px; }
+input { width:80%; padding:6px; background:#111; color:#0f0; border:1px solid #333; }
+button { padding:8px 14px; background:#333; color:#eee; border:1px solid #666; cursor:pointer; }
+button:hover { background:#444; }
+</style>
+</head>
+
+<body>
+
+<h1>tri5mix DISPATCHER</h1>
+<p>ENGINE + ROOT + ID + Geometrie + 6D‑Norm</p>
+
+<input id="t5" type="text" placeholder="Φ + AX + P4">
+<button onclick="go()">RUN</button>
+
+<pre id="out">Noch keine Eingabe.</pre>
+
+<script>
+// ENGINE
+function orbit(f){
+    if (f.includes("Φ")) return "IKI";
+    if (f.includes("φ∞")) return "MA³";
+    if (f.includes("φ²")) return "UC";
+    if (f.includes("φ")) return "BIR";
+    return "RAW";
+}
+
+function operator(f){
+    if (f.includes("AX")) return "AX";
+    if (f.includes("XA")) return "XA";
+    return "none";
+}
+
+function run(f){
+    if (f.includes("P4")) return "Start";
+    if (f.includes("P0")) return "Wake";
+    if (f.includes("P1")) return "Melt";
+    if (f.includes("P2")) return "Merge";
+    if (f.includes("Pe")) return "End";
+    return "none";
+}
+
+// DISPATCHER
 function tri5mix(f){
 
-    // ENGINE
     const axis = orbit(f);
     const op   = operator(f);
     const rn   = run(f);
 
-    // SCAN
     const scan = f.length;
-
-    // POS (4D)
-    const pos = scan % 16;
-
-    // MASS (5D)
+    const pos  = scan % 16;
     const mass = scan * 5;
 
-    // ORBIT‑Norm (6D)
     const orbitNorm = {
         "IKI":"Φ",
         "BIR":"φ",
@@ -26,7 +68,6 @@ function tri5mix(f){
         "RAW":"RAW"
     }[axis];
 
-    // ROOT‑ID
     const idMap = {
         "IKI": { axis:"A1", pos:"(1, Φ)", code:"Φ" },
         "BIR": { axis:"A2", pos:"(2, φ)", code:"φ" },
@@ -37,7 +78,6 @@ function tri5mix(f){
 
     const id = idMap[axis];
 
-    // 6D‑Körper
     return {
         CORE: axis,
         AXIS: id.axis,
@@ -51,4 +91,26 @@ function tri5mix(f){
         GEOMETRY: "6D"
     };
 }
+
+// OUTPUT
+function go(){
+    const f = document.getElementById("t5").value;
+    const out = tri5mix(f);
+
+    document.getElementById("out").innerText =
+        "tri5mix DISPATCHER\n\n" +
+        "CORE = " + out.CORE + "\n" +
+        "AXIS = " + out.AXIS + "\n" +
+        "CODE = " + out.CODE + "\n" +
+        "POS = " + out.POS + "\n" +
+        "MASS = " + out.MASS + "\n" +
+        "RUN = " + out.RUN + "\n" +
+        "OPERATOR = " + out.OPERATOR + "\n" +
+        "ORBIT = " + out.ORBIT + "\n" +
+        "SCAN = " + out.SCAN + "\n" +
+        "GEOMETRY = " + out.GEOMETRY + "\n";
+}
 </script>
+
+</body>
+</html>
