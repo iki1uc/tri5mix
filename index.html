@@ -12,6 +12,18 @@ button { padding:8px 14px; background:#333; color:#eee; border:1px solid #666; c
 button:hover { background:#444; }
 pre { background:#000; border:1px solid #333; padding:10px; }
 a { color:#6cf; }
+
+/* RUN‑8 BIOS DOM */
+#bios8 ul { list-style:none; padding:0; }
+#bios8 li { padding:4px; cursor:pointer; border:1px solid #0f0; margin:4px 0; }
+#bios8 li:hover { background:#0f0; color:#000; }
+
+#dom8 .screen8 {
+  display:none;
+  border:1px solid #0f0;
+  padding:10px;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -73,6 +85,62 @@ function go(){
 <a href="error.html?from=INDEX&axis=A3&core=UC&pos=(3,φ²)&code=φ²&id=IDX-001&mode=NC&hint=INDEX+Fehler">
 INDEX → ERROR
 </a>
+
+<hr>
+<h2>RUN 8 – BIOS DOM</h2>
+
+<div id="bios8">
+<ul>
+<li data-view="station1">Φ :: IKI</li>
+<li data-view="station2">φ :: BIR</li>
+<li data-view="station3">φ² :: UC</li>
+<li data-view="station4">φ∞ :: MA³</li>
+<li data-view="station5">M₅ :: Präsentation</li>
+<li data-view="station6">STATIONS :: Übersicht</li>
+<li data-view="station7">SPACE :: Raum</li>
+<li data-view="station8">INVARIANCE :: φ‑Reihe</li>
+</ul>
+</div>
+
+<div id="dom8">
+
+<div id="station1" class="screen8">Φ = Verhältnis (IKI)<br>Φ = 1.618…</div>
+<div id="station2" class="screen8">φ = Rekursion (BIR)</div>
+<div id="station3" class="screen8">φ² = Quadratur (UC)</div>
+<div id="station4" class="screen8">φ∞ = Unendlichkeit (MA³)</div>
+<div id="station5" class="screen8">M₅ = (Φ + φ + φ² + φ∞) / 4</div>
+<div id="station6" class="screen8">Alle Stationen sichtbar</div>
+<div id="station7" class="screen8">Line → Plane → Volume</div>
+<div id="station8" class="screen8">φ → φ² → φ∞</div>
+
+</div>
+
+<script>
+document.querySelectorAll("#bios8 li").forEach(li => {
+  li.addEventListener("click", () => {
+    const view = li.getAttribute("data-view");
+
+    document.querySelectorAll("#dom8 .screen8").forEach(div => {
+      div.style.display = "none";
+    });
+
+    document.getElementById(view).style.display = "block";
+  });
+});
+</script>
+
+<script>
+setInterval(() => {
+  const err = document.getElementById("error");
+  if (err && err.style.display === "block") {
+    err.style.display = "none";
+
+    document.querySelectorAll("#dom8 .screen8").forEach(div => {
+      div.style.display = "none";
+    });
+  }
+}, 300);
+</script>
 
 </body>
 </html>
