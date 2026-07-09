@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>tri5mix – ID</title>
+
+<style>
+body { background:#000; color:#0f0; font-family:monospace; }
+h1, h2 { color:#6cf; }
+pre { background:#000; border:1px solid #333; padding:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>tri5mix – ID</h1>
+<p>Identität des 5‑Achsen‑Moduls</p>
+
+<pre>
+CORE = tri5mix
+AXES = A1 / A2 / A3 / A4 / A5
+
+A1 = IKI   (Φ)
+A2 = BIR   (φ)
+A3 = UC    (φ²)
+A4 = MA³   (φ∞)
+A5 = RAW   (neutral)
+
+POS = (5, Φ→φ→φ²→φ∞)
+RUN = P4 → P0 → P1 → P2 → Pe
+
+LOAD = { RESPO, RAW, PIPE }
+MAP  = { Φ, φ, φ², φ∞ }
+
+tri5mix ist ein 5‑Achsen‑Dispatcher.
+Jede Achse sendet:
+active / id / eich / gen / tech / ort / mode
+an error.html (grundsystem1.0).
+</pre>
+
+</body>
+</html>
 
