@@ -5,17 +5,10 @@
 <title>tri5mix – AXIOM ERRORMETER</title>
 
 <style>
-    body { background:#000; color:#f33; font-family:monospace; padding:20px; }
-    h1 { color:#f55; }
-    .box {
-        background:#100;
-        padding:20px;
-        border:1px solid #f33;
-        border-radius:8px;
-        margin-bottom:20px;
-    }
-    pre { background:#000; border:1px solid #333; padding:10px; color:#faa; }
-    a { color:#6cf; }
+body { background:#000; color:#f33; font-family:monospace; padding:20px; }
+h1 { color:#f55; }
+.box { background:#100; padding:20px; border:1px solid #f33; border-radius:8px; margin-bottom:20px; }
+pre { background:#000; border:1px solid #333; padding:10px; color:#faa; }
 </style>
 </head>
 
@@ -24,39 +17,29 @@
 <h1>tri5mix – AXIOM ERRORMETER</h1>
 
 <div class="box">
-    <strong>Fehler:</strong>
-    <p id="msg">Kein Fehler empfangen.</p>
+<strong>Fehler:</strong>
+<p id="msg">Kein Fehler empfangen.</p>
 </div>
 
 <div class="box">
-    <strong>AXIOM‑Lage:</strong>
-    <pre id="axiom">Lade…</pre>
+<strong>AXIOM‑Lage:</strong>
+<pre id="axiom">Lade…</pre>
 </div>
 
 <script>
 const p = new URLSearchParams(window.location.search);
 
-const msg = p.get("hint") || p.get("msg") || "Unbekannter Fehler";
-document.getElementById("msg").innerText = msg;
-
-const axiom = {
-    from: p.get("from") || "none",
-    axis: p.get("axis") || "none",
-    core: p.get("core") || "none",
-    pos:  p.get("pos")  || "none",
-    code: p.get("code") || "none",
-    mode: p.get("mode") || "none",
-    id:   p.get("id")   || "none"
-};
+document.getElementById("msg").innerText =
+    p.get("hint") || p.get("msg") || "Unbekannter Fehler";
 
 document.getElementById("axiom").innerText =
-    "FROM = " + axiom.from + "\n" +
-    "AXIS = " + axiom.axis + "\n" +
-    "CORE = " + axiom.core + "\n" +
-    "POS  = " + axiom.pos  + "\n" +
-    "CODE = " + axiom.code + "\n" +
-    "MODE = " + axiom.mode + "\n" +
-    "ID   = " + axiom.id   + "\n";
+    "FROM = " + (p.get("from") || "none") + "\n" +
+    "AXIS = " + (p.get("axis") || "none") + "\n" +
+    "CORE = " + (p.get("core") || "none") + "\n" +
+    "POS  = " + (p.get("pos")  || "none") + "\n" +
+    "CODE = " + (p.get("code") || "none") + "\n" +
+    "MODE = " + (p.get("mode") || "none") + "\n" +
+    "ID   = " + (p.get("id")   || "none") + "\n";
 </script>
 
 </body>
