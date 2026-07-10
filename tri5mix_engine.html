@@ -2,11 +2,12 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>tri5mix ENGINE – 5‑Achsen‑Dispatcher</title>
+<title>tri5mix ENGINE – Modul</title>
+
 <style>
-body { background:#000; color:#0f0; font-family:monospace; }
+body { background:#000; color:#0f0; font-family:monospace; padding:20px; }
 h1 { color:#6cf; }
-pre { background:#000; padding:10px; border:1px solid #333; }
+pre { background:#000; border:1px solid #333; padding:10px; }
 input { width:80%; padding:6px; background:#111; color:#0f0; border:1px solid #333; }
 button { padding:8px 14px; background:#333; color:#eee; border:1px solid #666; cursor:pointer; }
 button:hover { background:#444; }
@@ -16,7 +17,7 @@ button:hover { background:#444; }
 <body>
 
 <h1>tri5mix ENGINE – 5‑Achsen‑Dispatcher</h1>
-<p>RAW‑Engine für IKI / BIR / UC / MA³ / RAW</p>
+<p>Modul für IKI / BIR / UC / MA³ / RAW</p>
 
 <input id="t5" type="text" placeholder="Φ + AX + P4">
 <button onclick="go()">RUN</button>
@@ -24,7 +25,9 @@ button:hover { background:#444; }
 <pre id="out">Noch keine Eingabe.</pre>
 
 <script>
-// Orbit / Operator / RUN kompatibel mit index.html
+// ------------------------------
+// ENGINE – Achsenlogik
+// ------------------------------
 function orbit(f){
     if (f.includes("Φ")) return "IKI";
     if (f.includes("φ∞")) return "MA³";
@@ -48,19 +51,22 @@ function run(f){
     return "none";
 }
 
+// ------------------------------
+// ENGINE – Dispatcher
+// ------------------------------
 function go(){
     let f = document.getElementById("t5").value;
 
     let axis = orbit(f);
-    let op = operator(f);
-    let rn = run(f);
+    let op   = operator(f);
+    let rn   = run(f);
 
-    let pos = f.length % 5;
+    let pos  = f.length % 5;
     let mass = f.length * 5;
 
     document.getElementById("out").innerText =
         "tri5mix ENGINE\n\n" +
-        "AXIS = " + axis + "\n" +
+        "CORE = " + axis + "\n" +
         "OPERATOR = " + op + "\n" +
         "RUN = " + rn + "\n\n" +
         "POS = " + pos + "\n" +
