@@ -54,6 +54,19 @@ body { background:#000; color:#0f0; font-family:monospace; margin:0; }
   text-align: center;
   font-size: 24px;
 }
+
+/* INDEX→M5 Button */
+#indexErrorBtn {
+  display: inline-block;
+  padding: 8px;
+  border: 1px solid #0f0;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#indexErrorBtn:hover {
+  background:#0f0;
+  color:#000;
+}
 </style>
 </head>
 
@@ -83,6 +96,10 @@ body { background:#000; color:#0f0; font-family:monospace; margin:0; }
 <button onclick="go()">RUN</button>
 
 <pre id="out">Noch keine Eingabe.</pre>
+
+<!-- Neuer INDEX→M5 Button -->
+<a id="indexErrorBtn">INDEX → M₅ :: Präsentation</a>
+
 </div>
 
 <!-- 4‑Fach‑Achsen‑Visualisierung -->
@@ -165,6 +182,18 @@ document.querySelectorAll(".menu-item").forEach(item => {
 
     document.getElementById(view).style.display = "block";
   });
+});
+</script>
+
+<!-- INDEX→M5 Button Funktion -->
+<script>
+document.getElementById("indexErrorBtn").addEventListener("click", () => {
+
+  document.querySelectorAll(".screen").forEach(div => {
+    div.style.display = "none";
+  });
+
+  document.getElementById("m5").style.display = "block";
 });
 </script>
 
